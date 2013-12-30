@@ -22,5 +22,6 @@
     <string name="dot">.</string>
     <string name="equals">=</string>
     <string name="star">*</string>
+    <string name="Answer">0</string>
 
 </resources>

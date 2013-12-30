@@ -27,6 +27,17 @@
             android:gravity="center_horizontal"
             android:text="@string/Display"
             android:textSize="12pt" />
+        
+        <TextView
+            android:id="@+id/tvAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5pt"
+            android:layout_marginRight="5pt"
+            android:layout_marginTop="3pt"
+            android:gravity="center_horizontal"
+            android:text="@string/Answer"
+            android:textSize="12pt" />
 
 
     </LinearLayout>
