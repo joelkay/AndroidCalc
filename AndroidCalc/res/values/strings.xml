@@ -3,7 +3,7 @@
 
     <string name="app_name">AndroidCalc</string>
     <string name="action_settings">Settings</string>
-    <string name="Display">Current Display is 0</string>
+    <string name="Display"></string>
     <string name="c">C</string>
     <string name="ce">CE</string>
     <string name="divide">/</string>
@@ -23,5 +23,6 @@
     <string name="equals">=</string>
     <string name="star">*</string>
     <string name="Answer">0</string>
+    <string name="Displayhint">Enter some Values</string>
 
 </resources>

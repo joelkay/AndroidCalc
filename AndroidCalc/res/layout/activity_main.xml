@@ -17,7 +17,7 @@
         android:layout_weight="0.001"
         android:orientation="vertical" >
 
-        <TextView
+        <EditText
             android:id="@+id/tvDisplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +26,7 @@
             android:layout_marginTop="3pt"
             android:gravity="center_horizontal"
             android:text="@string/Display"
+            android:hint="@string/Displayhint"
             android:textSize="12pt" />
         
         <TextView
@@ -37,8 +38,8 @@
             android:layout_marginTop="3pt"
             android:gravity="center_horizontal"
             android:text="@string/Answer"
+            android:textColor="#4175B9"
             android:textSize="12pt" />
-
 
     </LinearLayout>
 

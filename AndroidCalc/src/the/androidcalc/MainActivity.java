@@ -2,24 +2,31 @@ package the.androidcalc;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
-
-	String calc; //this is the total of our calculation
-	TextView display;
+public class MainActivity extends Activity implements OnClickListener {
+	float num1;
+	float num2;
+	String operand,buffer;
+	EditText display;
+	TextView answer;
 	Button b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdot;//inputs
 	Button oadd, osub, odiv, omult;//operators
 	Button clear, cleare, equals;//clear buttons
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		calc = "";
-		display = (TextView) findViewById(R.id.tvDisplay);
+		
+		display = (EditText) findViewById(R.id.tvDisplay);
+		answer = (TextView) findViewById(R.id.tvAnswer);
 		
 		b1 = (Button) findViewById(R.id.btnOne);
 		b2 = (Button) findViewById(R.id.btnTwo);
@@ -42,128 +49,284 @@ public class MainActivity extends Activity {
 		
 		clear = (Button) findViewById(R.id.btnClear);
 		cleare = (Button) findViewById(R.id.btnClearEntry);
+		
+		try{
+			b1.setOnClickListener((OnClickListener) this);
+			b2.setOnClickListener((OnClickListener) this);
+			b3.setOnClickListener((OnClickListener) this);
+			b4.setOnClickListener((OnClickListener) this);
+			b5.setOnClickListener((OnClickListener) this);
+			b6.setOnClickListener((OnClickListener) this);
+			b7.setOnClickListener((OnClickListener) this);
+			b8.setOnClickListener((OnClickListener) this);
+			b9.setOnClickListener((OnClickListener) this);
+			b0.setOnClickListener((OnClickListener) this);
+			bdot.setOnClickListener((OnClickListener) this);
+			oadd.setOnClickListener((OnClickListener) this);
+			osub.setOnClickListener((OnClickListener) this);
+			odiv.setOnClickListener((OnClickListener) this);
+			omult.setOnClickListener((OnClickListener) this);
+			clear.setOnClickListener((OnClickListener) this);
+			cleare.setOnClickListener((OnClickListener) this);
+			equals.setOnClickListener((OnClickListener) this);
+		}
+		catch(Exception e){
+            
+        }
 	
-		
-		bdot.setOnClickListener(new View.OnClickListener() {
+	}
+	
+	public void Calculate(){
+		if(operand.equals("+")){
+			num2 = Float.parseFloat(display.getText().toString());
+			display.setText("");
+			num1 = num1 + num2;
+			answer.setText(Float.toString(num1));
+		}
+		else if(operand.equals("-")){
+			num2 = Float.parseFloat(display.getText().toString());
+			display.setText("");
+			num1 = num1 - num2;
+			answer.setText(Float.toString(num1));
+		}
+		else if(operand.equals("*")){
+			num2 = Float.parseFloat(display.getText().toString());
+			display.setText("");
+			num1 = num1 * num2;
+			answer.setText(Float.toString(num1));
+		}
+		else if(operand.equals("/")){
+			num2 = Float.parseFloat(display.getText().toString());
+			display.setText("");
+			num1 = num1 / num2;
+			answer.setText(Float.toString(num1));
+		}
+	}
+	
+	@Override
+	public void onClick(View id){
+		Editable str =  display.getText();
+		switch(id.getId()){
+			case R.id.btnOne:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b1.getText());
+				display.setText(str);
+			break;
+			case R.id.btnTwo:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b2.getText());
+				display.setText(str);
+			break;
+			case R.id.btnThree:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b3.getText());
+				display.setText(str);
+			break;
+			case R.id.btnFour:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b4.getText());
+				display.setText(str);
+			break;
+			case R.id.btnFive:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b5.getText());
+				display.setText(str);
+			break;
+			case R.id.btnSix:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b6.getText());
+				display.setText(str);
+			break;
+			case R.id.btnSeven:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b7.getText());
+				display.setText(str);
+			break;
+			case R.id.btnEight:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b8.getText());
+				display.setText(str);
+			break;
+			case R.id.btnNine:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b9.getText());
+				display.setText(str);
+			break;
+			case R.id.btnZero:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(b0.getText());
+				display.setText(str);
+			break;
 			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+=".";//adds one to the calculation
-				display.setText(calc);
-			}
-		});
-		
-		b0.setOnClickListener(new View.OnClickListener() {
+			case R.id.btnDot:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+				}
+				str = str.append(bdot.getText());
+				display.setText(str);
+			break;
 			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="0";//adds one to the calculation
-				display.setText(calc);
-			}
-		});
-		
-		b1.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="1";//adds one to the calculation
-				display.setText(calc);
-			}
-		});
-		
-		
-		b2.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="2";//adds one to the calculation
-				display.setText(calc);
+			case R.id.btnClear:
+				num1=0;
+				num2=0;
+				display.setText("");
+				display.setHint("Enter a new calculation");
+				answer.setText("");
+			break;
 				
-			}
-		});
-		
-		b3.setOnClickListener(new View.OnClickListener() {
+			case R.id.btnClearEntry:
+				if(num2 != 0){
+					num2 = 0;
+					display.setText("");
+					answer.setText(Float.toString(num1));
+				}
+				operand=null;
+				str.clear();
+				display.setText(str);
+			break;
 			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="3";//adds one to the calculation
-				display.setText(calc);
-			}
-		});
-		
-		
-		b4.setOnClickListener(new View.OnClickListener() {
+			case R.id.btnPlus:
+				operand="+";
+				if(num1 == 0){
+					num1=Float.parseFloat(display.getText().toString());
+					display.setText("");
+					buffer=num1+"+";
+					answer.setText(buffer);
+				}
+				else if(num2 !=0 ){
+					num2 = 0;
+					display.setText("");
+				}
+				else{
+					num2 = Float.parseFloat(display.getText().toString());
+					display.setText("");
+					num1 = num1+num2;
+					answer.setText(Float.toString(num1));
+				}
+			break;
 			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="4";//adds one to the calculation
-				display.setText(calc);
+			case R.id.btnMinus:
+				operand="-";
+				if(num1 == 0){
+					num1=Float.parseFloat(display.getText().toString());
+					display.setText("");
+					buffer=num1+"-";
+					answer.setText(buffer);
+				}
+				else if(num2 !=0 ){
+					num2 = 0;
+					display.setText("");
+				}
+				else{
+					num2 = Float.parseFloat(display.getText().toString());
+					display.setText("");
+					num1 = num1-num2;
+					answer.setText(Float.toString(num1));
+				}
+			break;
+			
+			case R.id.btnMultiply:
+				operand="*";
+				if(num1 == 0){
+					num1=Float.parseFloat(display.getText().toString());
+					display.setText("");
+					buffer=num1+"*";
+					answer.setText(buffer);
+				}
+				else if(num2 !=0 ){
+					num2 = 0;
+					display.setText("");
+				}
+				else{
+					num2 = Float.parseFloat(display.getText().toString());
+					display.setText("");
+					num1 = num1*num2;
+					answer.setText(Float.toString(num1));
+				}
+			break;
+			
+			case R.id.btnDivide:
+				operand="/";
+				if(num1 == 0){
+					num1=Float.parseFloat(display.getText().toString());
+					display.setText("");
+					buffer=num1+"/";
+					answer.setText(buffer);
+				}
+				else if(num2 !=0 ){
+					num2 = 0;
+					display.setText("");
+				}
+				else{
+					num2 = Float.parseFloat(display.getText().toString());
+					display.setText("");
+					num1 = num1/num2;
+					answer.setText(Float.toString(num1));
+				}
+			break;
+			
+			case R.id.btnEqual:
+				if(!operand.equals(null)){
+					if(num2!=0){
+						if(operand.equals("+")){
+							//num1 = num1+num2;
+							answer.setText(Float.toString(num1));
+						}	
+						else if(operand.equals("-")){
+							//num1 = num1-num2;
+							answer.setText(Float.toString(num1));
+ 
+						}
+						else if(operand.equals("*")){
+							//num1 = num1*num2;
+							answer.setText(Float.toString(num1));
+ 
+						}
+						else if(operand.equals("/")){
+							//num1 = num1/num2;
+							answer.setText(Float.toString(num1));
+ 
+						}
+					}
+					else{
+						Calculate();
+					}
+				}
 				
-			}
-		});
-		
-		b5.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="5";//adds one to the calculation
-				display.setText(calc);
-			}
-		});
-		
-		
-		b6.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="6";//adds one to the calculation
-				display.setText(calc);
 				
-			}
-		});
-		
-		b7.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="7";//adds one to the calculation
-				display.setText(calc);
-			}
-		});
-		
-		
-		b8.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="8";//adds one to the calculation
-				display.setText(calc);
-				
-			}
-		});
-		
-		b9.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				calc+="9";//adds one to the calculation
-				display.setText(calc);
-				
-			}
-		});
-		
-		
+			break;
+		}
 	}
 
 	@Override
