@@ -1,7 +1,19 @@
 package the.androidcalc;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.app.Activity;
+import android.content.Context;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +34,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		StrictMode.ThreadPolicy policy = new StrictMode.
+		ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy); 
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -76,30 +92,64 @@ public class MainActivity extends Activity implements OnClickListener {
 	
 	}
 	
+	public boolean isNetworkAvailable() {
+	    ConnectivityManager cm = (ConnectivityManager) 
+	      getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+	    // if no network is available networkInfo will be null
+	    // otherwise check if we are connected
+	    if (networkInfo != null && networkInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	} 
+	
+	
 	public void Calculate(){
-		if(operand.equals("+")){
-			num2 = Float.parseFloat(display.getText().toString());
-			display.setText("");
-			num1 = num1 + num2;
-			answer.setText(Float.toString(num1));
+		BufferedReader in = null;
+
+		if(isNetworkAvailable()){
+			try {
+				num2 = Float.parseFloat(display.getText().toString());
+				display.setText("");
+				
+				HttpClient httpclient = new DefaultHttpClient();
+				
+				String server = "http://cs.kent.ac.uk/~iau/calc.php";
+				String calculation="";
+				
+				if(operand.equals("+")){
+					calculation= "?f=A&v1="+num1+"&v2="+num2;
+				}
+				else if(operand.equals("-")){
+					calculation= "?f=S&v1="+num1+"&v2="+num2;
+				}
+				else if(operand.equals("*")){
+					calculation= "?f=M&v1="+num1+"&v2="+num2;
+				}
+				else if(operand.equals("/")){
+					calculation= "?f=D&v1="+num1+"&v2="+num2;
+				}
+				
+				URI uri = new URI(server+calculation);
+				HttpGet request =  new HttpGet();
+				request.setURI(uri);
+				
+				HttpResponse response = httpclient.execute(request);
+				in = new BufferedReader(new InputStreamReader(
+		                   response.getEntity().getContent()));
+				
+				String line = in.readLine();
+				
+				answer.setText(line);
+				
+			}
+			catch (Exception e) {
+				  e.printStackTrace();
+			}
 		}
-		else if(operand.equals("-")){
-			num2 = Float.parseFloat(display.getText().toString());
-			display.setText("");
-			num1 = num1 - num2;
-			answer.setText(Float.toString(num1));
-		}
-		else if(operand.equals("*")){
-			num2 = Float.parseFloat(display.getText().toString());
-			display.setText("");
-			num1 = num1 * num2;
-			answer.setText(Float.toString(num1));
-		}
-		else if(operand.equals("/")){
-			num2 = Float.parseFloat(display.getText().toString());
-			display.setText("");
-			num1 = num1 / num2;
-			answer.setText(Float.toString(num1));
+		else{
+			answer.setText("Connection Failed");
 		}
 	}
 	
@@ -297,34 +347,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 			
 			case R.id.btnEqual:
-				if(!operand.equals(null)){
-					if(num2!=0){
-						if(operand.equals("+")){
-							//num1 = num1+num2;
-							answer.setText(Float.toString(num1));
-						}	
-						else if(operand.equals("-")){
-							//num1 = num1-num2;
-							answer.setText(Float.toString(num1));
- 
-						}
-						else if(operand.equals("*")){
-							//num1 = num1*num2;
-							answer.setText(Float.toString(num1));
- 
-						}
-						else if(operand.equals("/")){
-							//num1 = num1/num2;
-							answer.setText(Float.toString(num1));
- 
-						}
-					}
-					else{
-						Calculate();
-					}
+				if(!operand.equals(null)){	
+					Calculate();
 				}
-				
-				
+						
 			break;
 		}
 	}
