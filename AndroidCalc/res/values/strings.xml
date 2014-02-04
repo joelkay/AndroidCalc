@@ -23,6 +23,6 @@
     <string name="equals">=</string>
     <string name="star">*</string>
     <string name="Answer">0</string>
-    <string name="Displayhint">Enter some Values</string>
+    <string name="Displayhint">Enter number</string>
 
 </resources>

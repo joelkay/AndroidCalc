@@ -25,7 +25,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements OnClickListener {
 	float num1;
 	float num2;
-	String operand,buffer="";
+	String operand;
 	EditText display;
 	TextView answer;
 	Button b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdot;//inputs
@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+			
 		display = (EditText) findViewById(R.id.tvDisplay);
 		answer = (TextView) findViewById(R.id.tvAnswer);
 		
@@ -141,10 +141,10 @@ public class MainActivity extends Activity implements OnClickListener {
 				
 				String line = in.readLine();
 				
-				answer.setText(line);
+				answer.setText(line+operand);
 				num1 = Float.parseFloat(line);
-				buffer=line;
-				
+
+					
 			}
 			catch (Exception e) {
 				  e.printStackTrace();
@@ -166,8 +166,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b1.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+
 			break;
 			
 			case R.id.btnTwo:
@@ -177,8 +176,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b2.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+
 			break;
 			case R.id.btnThree:
 				if(num2 != 0){
@@ -187,8 +185,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b3.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+
 			break;
 			case R.id.btnFour:
 				if(num2 != 0){
@@ -197,8 +194,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b4.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+			
 			break;
 			case R.id.btnFive:
 				if(num2 != 0){
@@ -207,8 +203,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b5.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+		
 			break;
 			case R.id.btnSix:
 				if(num2 != 0){
@@ -217,8 +212,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b6.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+		
 			break;
 			case R.id.btnSeven:
 				if(num2 != 0){
@@ -227,8 +221,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b7.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+		
 			break;
 			case R.id.btnEight:
 				if(num2 != 0){
@@ -237,8 +230,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b8.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+	
 			break;
 			case R.id.btnNine:
 				if(num2 != 0){
@@ -247,8 +239,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b9.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+
 			break;
 			case R.id.btnZero:
 				if(num2 != 0){
@@ -257,8 +248,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(b0.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+
 			break;
 			
 			case R.id.btnDot:
@@ -268,8 +258,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 				str = str.append(bdot.getText());
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+			
 			break;
 			
 			case R.id.btnClear:
@@ -278,7 +267,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				display.setText("");
 				display.setHint("Enter a new calculation");
 				answer.setText("");
-				buffer="";
+
 			break;
 				
 			case R.id.btnClearEntry:
@@ -288,17 +277,13 @@ public class MainActivity extends Activity implements OnClickListener {
 					answer.setText(Float.toString(num1));
 				}
 				operand=null;
-				buffer="";
 				str.clear();
 				display.setText(str);
-				buffer+=str;
-				answer.setText(buffer);
+			
 			break;
 			
 			case R.id.btnPlus:
 				operand="+";
-				buffer+=operand;
-				answer.setText(buffer);
 				if(num1 == 0){
 					num1=Float.parseFloat(display.getText().toString());
 					display.setText("");
@@ -310,8 +295,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			case R.id.btnMinus:
 				operand="-";
-				buffer+=operand;
-				answer.setText(buffer);
 				if(num1 == 0){
 					num1=Float.parseFloat(display.getText().toString());
 					display.setText("");
@@ -324,8 +307,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			case R.id.btnMultiply:
 				operand="*";
-				buffer+=operand;
-				answer.setText(buffer);
 				if(num1 == 0){
 					num1=Float.parseFloat(display.getText().toString());
 					display.setText("");
@@ -337,8 +318,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			case R.id.btnDivide:
 				operand="/";
-				buffer+=operand;
-				answer.setText(buffer);
 				if(num1 == 0){
 					num1=Float.parseFloat(display.getText().toString());
 					display.setText("");
